@@ -1,0 +1,42 @@
+# Jedna instancja KIAUH, Mainsail przez lokalny reverse proxy nginx.
+[server]
+host: 127.0.0.1
+port: 7125
+klippy_uds_address: {data_path}/comms/klippy.sock
+
+[authorization]
+# Dopasuj zaufaną sieć do swojej sieci LAN (stary Spoolman: 192.168.0.103).
+trusted_clients:
+    127.0.0.0/8
+    ::1/128
+    192.168.0.0/24
+cors_domains:
+    *.local
+    *.lan
+
+[file_manager]
+enable_object_processing: True
+
+[history]
+
+[octoprint_compat]
+
+[update_manager]
+refresh_interval: 168
+
+[update_manager mainsail]
+type: web
+channel: stable
+repo: mainsail-crew/mainsail
+path: ~/mainsail
+persistent_files:
+    config.json
+
+
+[update_manager led_effect]
+type: git_repo
+path: ~/klipper-led_effect
+origin: https://github.com/julianschill/klipper-led_effect.git
+is_system_service: False
+
+
